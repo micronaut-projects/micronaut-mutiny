@@ -1,1 +1,1 @@
-TODO
+Integration of Micronaut with https://smallrye.io/smallrye-mutiny/latest/[Mutiny]

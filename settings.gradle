@@ -9,10 +9,10 @@ plugins {
     id 'io.micronaut.build.shared.settings' version '8.0.0'
 }
 
-rootProject.name = 'project-template-parent'
+rootProject.name = 'mutiny-parent'
 
-include 'project-template'
-include 'project-template-bom'
+include 'mutiny'
+include 'mutiny-bom'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 
