@@ -83,8 +83,8 @@ public interface MutinyHttpClient extends Closeable, LifeCycle<MutinyHttpClient>
      * @param <I> The request body type
      * @return The response
      */
-    default <I> Uni<HttpResponse<ByteBuffer>> exchange(HttpRequest<I> request) {
-        return exchange(request, ByteBuffer.class);
+    default <I> Uni<HttpResponse<ByteBuffer<?>>> exchange(HttpRequest<I> request) {
+        return exchange(request, byteBufferBodyType());
     }
 
     /**
@@ -93,8 +93,8 @@ public interface MutinyHttpClient extends Closeable, LifeCycle<MutinyHttpClient>
      * @param uri The URI
      * @return The response
      */
-    default Uni<HttpResponse<ByteBuffer>> exchange(String uri) {
-        return exchange(HttpRequest.GET(uri), ByteBuffer.class);
+    default Uni<HttpResponse<ByteBuffer<?>>> exchange(String uri) {
+        return exchange(HttpRequest.GET(uri), byteBufferBodyType());
     }
 
     /**
@@ -201,5 +201,10 @@ public interface MutinyHttpClient extends Closeable, LifeCycle<MutinyHttpClient>
      */
     static MutinyHttpClient create(@Nullable URL url, HttpClientConfiguration configuration) {
         return new BridgedMutinyHttpClient(HttpClient.create(url, configuration));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static Argument<ByteBuffer<?>> byteBufferBodyType() {
+        return (Argument) Argument.of(ByteBuffer.class, Argument.OBJECT_ARGUMENT);
     }
 }
