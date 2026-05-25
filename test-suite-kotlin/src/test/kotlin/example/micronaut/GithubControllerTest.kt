@@ -35,7 +35,7 @@ import java.util.regex.Pattern
 
 class GithubControllerTest {
     val MICRONAUT_RELEASE =
-            Pattern.compile("Micronaut (Core |Framework )?v?\\d+.\\d+.\\d+( (RC|M)\\d)?")
+            Pattern.compile("Micronaut (Core |Framework )?v?\\d+\\.\\d+\\.\\d+( (RC|M)\\d)?")
 
     @Test
     fun verifyGithubReleasesCanBeFetched() {
