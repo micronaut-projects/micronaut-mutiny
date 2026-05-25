@@ -41,17 +41,18 @@ class GithubControllerTest {
     fun verifyGithubReleasesCanBeFetched() {
         val config = mapOf("micronaut.codec.json.additional-types" to listOf("application/vnd.github.v3+json"),
             "spec.name" to "GithubControllerTest")
-        val github : EmbeddedServer = ApplicationContext.run(EmbeddedServer::class.java, config)
-        val embeddedServer : EmbeddedServer  = ApplicationContext.run(EmbeddedServer::class.java,
-            mapOf("micronaut.http.services.github.url" to "http://localhost:${github.port}")
-        )
-        val httpClient : HttpClient = embeddedServer.applicationContext
-            .createBean(HttpClient::class.java, embeddedServer.url)
-        val client = httpClient.toBlocking()
-        assertReleases(client, "/github/releases")
-        httpClient.close()
-        embeddedServer.close()
-        github.close()
+        ApplicationContext.run(EmbeddedServer::class.java, config).use { github ->
+            ApplicationContext.run(EmbeddedServer::class.java,
+                mapOf("micronaut.http.services.github.url" to "http://localhost:${github.port}")
+            ).use { embeddedServer ->
+                embeddedServer.applicationContext
+                    .createBean(HttpClient::class.java, embeddedServer.url)
+                    .use { httpClient ->
+                        val client = httpClient.toBlocking()
+                        assertReleases(client, "/github/releases")
+                    }
+            }
+        }
     }
 
     fun assertReleases(client: BlockingHttpClient, path: String) {
