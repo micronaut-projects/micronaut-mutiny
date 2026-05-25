@@ -94,7 +94,7 @@ class GithubControllerTest {
         Optional<String> coreReleases() {
             return resourceLoader.getResourceAsStream("releases.json")
                     .flatMap(inputStream -> {
-                        try {
+                        try (inputStream) {
                             return Optional.of(new String(inputStream.readAllBytes(), UTF_8));
                         } catch (IOException e) {
                             return Optional.empty();
