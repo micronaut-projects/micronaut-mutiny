@@ -34,7 +34,7 @@ import java.util.regex.Pattern
 
 class GithubControllerSpec extends Specification {
     private static Pattern MICRONAUT_RELEASE =
-            Pattern.compile("Micronaut (Core |Framework )?v?\\d+.\\d+.\\d+( (RC|M)\\d)?")
+            Pattern.compile("Micronaut (Core |Framework )?v?\\d+\\.\\d+\\.\\d+( (RC|M)\\d)?")
 
     void "verify GithubReleases can Be fetched"(String path) {
         given:
