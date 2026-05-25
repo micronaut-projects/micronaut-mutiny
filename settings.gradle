@@ -13,9 +13,15 @@ rootProject.name = 'mutiny-parent'
 
 include 'mutiny'
 include 'mutiny-bom'
+include 'mutiny-http-client'
+include 'test-suite'
+include 'test-suite-groovy'
+include 'test-suite-kotlin'
 
 enableFeaturePreview 'TYPESAFE_PROJECT_ACCESSORS'
 
 micronautBuild {
     importMicronautCatalog()
+    importMicronautCatalog("micronaut-serialization")
+
 }
