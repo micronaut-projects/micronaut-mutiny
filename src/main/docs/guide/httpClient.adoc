@@ -1,0 +1,21 @@
+The `micronaut-mutiny-http-client` module provides Mutiny wrappers for Micronaut client APIs.
+
+dependency:micronaut-mutiny-http-client[groupId="io.micronaut.mutiny"]
+
+Additionally, you have to add an implementation of the HTTP Client, either https://docs.micronaut.io/latest/guide/#nettyHttpClient[Netty Based HTTP Client] or the https://docs.micronaut.io/latest/guide/#jdkHttpClient[JDK HTTP Client].
+
+The primary interfaces are:
+
+* api:io.micronaut.mutiny.http.client.MutinyHttpClient[] for regular request/response operations.
+* api:io.micronaut.mutiny.http.client.MutinyStreamingHttpClient[] for streaming response bodies.
+* api:io.micronaut.mutiny.http.client.MutinySseClient[] for server-sent events.
+* api:io.micronaut.mutiny.http.client.proxy.MutinyProxyHttpClient[] for proxying requests.
+* api:io.micronaut.mutiny.http.client.websocket.MutinyWebSocketClient[] for WebSocket client connections.
+
+Declarative HTTP clients can return `Uni` and `Multi` directly:
+
+snippet::example.micronaut.GithubApiClient[]
+
+When a declarative client method returns `Uni`, a `404 Not Found` response is recovered as a `null` item.
+When it returns `Multi`, a `404 Not Found` response is recovered as an empty stream.
+Other HTTP errors continue to fail the `Uni` or `Multi`.

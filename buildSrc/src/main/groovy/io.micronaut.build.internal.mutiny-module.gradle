@@ -1,4 +1,17 @@
 plugins {
     id("io.micronaut.build.internal.mutiny-base")
     id("io.micronaut.build.internal.module")
+    id("jacoco")
+}
+tasks.withType(org.gradle.api.tasks.testing.Test).configureEach {
+    doFirst {
+        if (!allJvmArgs.any { it.startsWith("-javaagent:") && it.contains("jacocoagent") }) {
+            def jacoco = extensions.getByType(org.gradle.testing.jacoco.plugins.JacocoTaskExtension)
+            jvmArgs(jacoco.asJvmArg)
+        }
+    }
+    finalizedBy(tasks.named("jacocoTestReport"))
+}
+tasks.matching { it.name == "jacocoTestReport" }.configureEach {
+    dependsOn(tasks.withType(org.gradle.api.tasks.testing.Test))
 }

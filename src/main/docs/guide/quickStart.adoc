@@ -1,0 +1,9 @@
+Add the following dependency to your Micronaut application:
+
+dependency:micronaut-mutiny[groupId="io.micronaut.mutiny"]
+
+The core module registers Mutiny with Micronaut's reactive type system and conversion service. This allows controller methods and declarative clients to use `Uni` for single results and `Multi` for streams.
+
+Then you can return Mutiny classes in Controllers:
+
+snippet::example.micronaut.GithubController[]

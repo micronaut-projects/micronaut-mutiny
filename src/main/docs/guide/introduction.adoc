@@ -1,1 +1,8 @@
-Integration of Micronaut with https://smallrye.io/smallrye-mutiny/latest/[Mutiny]
+Micronaut Mutiny enables you to use https://smallrye.io/smallrye-mutiny/latest/[Mutiny] as a Reactive library within your Micronaut application.
+
+The following integrations are included:
+
+* Converters for `Uni` and `Multi` so they can be used in controllers, declarative HTTP clients, and conversion service interactions.
+* Type information so Micronaut recognizes `Uni` as a single-result reactive type and `Multi` as a multi-result reactive type.
+* Propagated context instrumentation for Mutiny callbacks.
+* Mutiny variants of the Micronaut HTTP, streaming HTTP, SSE, proxy, and WebSocket clients.
