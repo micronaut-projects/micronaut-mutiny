@@ -17,7 +17,6 @@ package example.micronaut
 
 import io.micronaut.context.annotation.ConfigurationProperties
 import io.micronaut.context.annotation.Requires
-import io.micronaut.core.annotation.Nullable
 
 @ConfigurationProperties(GithubConfiguration.PREFIX)
 @Requires(property = GithubConfiguration.PREFIX)
