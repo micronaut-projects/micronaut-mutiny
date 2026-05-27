@@ -91,6 +91,7 @@ class MutinyWebSocketClientUnitTest {
 
             @Override
             public void close() {
+                // No-op: this test double only verifies request-based default methods.
             }
         };
 

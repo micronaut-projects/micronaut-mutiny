@@ -465,6 +465,7 @@ class MutinyHttpClientUnitTest {
 
         @Override
         public void close() {
+            // No-op: stream default-method tests do not require lifecycle behavior.
         }
 
         @Override

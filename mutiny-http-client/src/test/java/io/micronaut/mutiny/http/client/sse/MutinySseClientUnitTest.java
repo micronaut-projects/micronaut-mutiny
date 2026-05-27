@@ -39,6 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -106,6 +107,7 @@ class MutinySseClientUnitTest {
 
             @Override
             public void close() {
+                // No-op: this test double only exercises the default SSE methods.
             }
         };
 
@@ -142,8 +144,13 @@ class MutinySseClientUnitTest {
 
     @Test
     void bridgedSseClientCloseIsNoOpForNonAutoCloseableDelegate() throws Exception {
-        SseClient delegate = proxy(SseClient.class, new Class<?>[0], (method, args) -> publisherOf(Event.of("noop")));
+        AtomicBoolean interacted = new AtomicBoolean();
+        SseClient delegate = proxy(SseClient.class, new Class<?>[0], (method, args) -> {
+            interacted.set(true);
+            return publisherOf(Event.of("noop"));
+        });
         new BridgedMutinySseClient(delegate).close();
+        assertFalse(interacted.get());
     }
 
     @Test
