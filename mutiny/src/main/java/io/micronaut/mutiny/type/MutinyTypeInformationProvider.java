@@ -34,12 +34,6 @@ public final class MutinyTypeInformationProvider implements TypeInformationProvi
         MutinyReactiveTypesRegistrar.register();
     }
 
-    /**
-     * Creates a Mutiny type information provider.
-     */
-    public MutinyTypeInformationProvider() {
-    }
-
     @Override
     public boolean isSingle(Class<?> type) {
         return Uni.class.isAssignableFrom(type);

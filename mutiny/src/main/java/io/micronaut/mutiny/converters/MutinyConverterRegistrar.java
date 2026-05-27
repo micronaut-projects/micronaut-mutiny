@@ -40,12 +40,6 @@ import java.util.concurrent.Flow;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class MutinyConverterRegistrar implements TypeConverterRegistrar {
 
-    /**
-     * Creates a Mutiny converter registrar.
-     */
-    public MutinyConverterRegistrar() {
-    }
-
     @Override
     public void register(MutableConversionService conversionService) {
         MutinyReactiveTypesRegistrar.register();

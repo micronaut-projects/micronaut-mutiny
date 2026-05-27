@@ -39,12 +39,6 @@ import java.util.function.Supplier;
  */
 public final class MutinyPropagatedContextCallbackDecorator implements CallbackDecorator {
 
-    /**
-     * Creates a Mutiny callback decorator.
-     */
-    public MutinyPropagatedContextCallbackDecorator() {
-    }
-
     @Override
     public <T> Supplier<T> decorate(Supplier<T> supplier) {
         PropagatedContext context = currentContext();
