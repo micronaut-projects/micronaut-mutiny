@@ -1,4 +1,4 @@
-package example.micronaut;/*
+/*
  * Copyright 2017-2026 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +13,7 @@ package example.micronaut;/*
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package example.micronaut;
 
 import io.micronaut.serde.annotation.Serdeable;
 
